@@ -45,8 +45,8 @@ class TestTextNode(unittest.TestCase):
     def test_eq_with_url(self):
         """Identical text, type and url should be equal."""
         self.assertEqual(
-            TextNode("OpenAI", TextType.LINK, "https://openai.com"),
-            TextNode("OpenAI", TextType.LINK, "https://openai.com"),
+            TextNode("Google it!", TextType.LINK, "https://www.google.com"),
+            TextNode("Google it!", TextType.LINK, "https://www.google.com"),
         )
 
 
