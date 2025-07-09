@@ -7,7 +7,7 @@ class TestTextNode(unittest.TestCase):
     def test_eq_identical_values(self):
         """Two nodes with identical constructor args compare equal."""
         self.assertEqual(
-            TextNode("spam", TextType.PLAIN), TextNode("spam", TextType.PLAIN)
+            TextNode("spam", TextType.TEXT), TextNode("spam", TextType.TEXT)
         )
 
     def test_eq_transitive(self):
@@ -22,7 +22,7 @@ class TestTextNode(unittest.TestCase):
     def test_neq_text(self):
         """Different text strings → not equal."""
         self.assertNotEqual(
-            TextNode("one", TextType.PLAIN), TextNode("two", TextType.PLAIN)
+            TextNode("one", TextType.TEXT), TextNode("two", TextType.TEXT)
         )
 
     def test_neq_text_type(self):
