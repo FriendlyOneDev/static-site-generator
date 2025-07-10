@@ -1,6 +1,7 @@
 import unittest
 from textnode import TextNode, TextType
 from text_utils import (
+    text_to_textnodes,
     split_nodes_delimiter,
     split_nodes_image,
     split_nodes_link,
@@ -229,6 +230,119 @@ class TestSplitNodesLink(unittest.TestCase):
                 TextNode("Just code", TextType.CODE),
             ],
         )
+
+
+class TestTextToTextNodes(unittest.TestCase):
+
+    def test_plain_text(self):
+        text = "Just plain text"
+        result = text_to_textnodes(text)
+        self.assertEqual(result, [TextNode("Just plain text", TextType.TEXT)])
+
+    def test_bold_text(self):
+        text = "This is **bold** text"
+        result = text_to_textnodes(text)
+        self.assertEqual(
+            result,
+            [
+                TextNode("This is ", TextType.TEXT),
+                TextNode("bold", TextType.BOLD),
+                TextNode(" text", TextType.TEXT),
+            ],
+        )
+
+    def test_italic_text(self):
+        text = "This is _italic_ text"
+        result = text_to_textnodes(text)
+        self.assertEqual(
+            result,
+            [
+                TextNode("This is ", TextType.TEXT),
+                TextNode("italic", TextType.ITALIC),
+                TextNode(" text", TextType.TEXT),
+            ],
+        )
+
+    def test_code_text(self):
+        text = "Here is `code`"
+        result = text_to_textnodes(text)
+        self.assertEqual(
+            result,
+            [
+                TextNode("Here is ", TextType.TEXT),
+                TextNode("code", TextType.CODE),
+            ],
+        )
+
+    def test_image(self):
+        text = "Here is an image ![cat](cat.jpg)"
+        result = text_to_textnodes(text)
+        self.assertEqual(
+            result,
+            [
+                TextNode("Here is an image ", TextType.TEXT),
+                TextNode("cat", TextType.IMAGE, "cat.jpg"),
+            ],
+        )
+
+    def test_link(self):
+        text = "Click [here](https://example.com) for info"
+        result = text_to_textnodes(text)
+        self.assertEqual(
+            result,
+            [
+                TextNode("Click ", TextType.TEXT),
+                TextNode("here", TextType.LINK, "https://example.com"),
+                TextNode(" for info", TextType.TEXT),
+            ],
+        )
+
+    def test_combined_formatting(self):
+        text = "**Bold** and _italic_ and `code`"
+        result = text_to_textnodes(text)
+        self.assertEqual(
+            result,
+            [
+                TextNode("Bold", TextType.BOLD),
+                TextNode(" and ", TextType.TEXT),
+                TextNode("italic", TextType.ITALIC),
+                TextNode(" and ", TextType.TEXT),
+                TextNode("code", TextType.CODE),
+            ],
+        )
+
+    def test_image_and_link(self):
+        text = "![dog](dog.png) and [Google](https://google.com)"
+        result = text_to_textnodes(text)
+        self.assertEqual(
+            result,
+            [
+                TextNode("dog", TextType.IMAGE, "dog.png"),
+                TextNode(" and ", TextType.TEXT),
+                TextNode("Google", TextType.LINK, "https://google.com"),
+            ],
+        )
+
+    def test_nested_ignored(self):
+        text = "This is **not _nested_** correctly"
+        result = text_to_textnodes(text)
+        self.assertEqual(
+            result,
+            [
+                TextNode("This is ", TextType.TEXT),
+                TextNode("not _nested_", TextType.BOLD),
+                TextNode(" correctly", TextType.TEXT),
+            ],
+        )
+
+    def test_unmatched_delimiter_raises(self):
+        text = "Unclosed **bold"
+        with self.assertRaises(ValueError):
+            text_to_textnodes(text)
+
+    def test_empty_string(self):
+        result = text_to_textnodes("")
+        self.assertEqual(result, [])
 
 
 if __name__ == "__main__":

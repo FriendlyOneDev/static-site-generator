@@ -1,4 +1,5 @@
 from textnode import TextNode, TextType
+from pprint import pprint
 import re
 
 
@@ -91,7 +92,13 @@ def split_nodes_link(old_nodes):
 
 
 def text_to_textnodes(text):
-    pass
+    nodes = [TextNode(text, TextType.TEXT)]
+    nodes = split_nodes_image(nodes)
+    nodes = split_nodes_link(nodes)
+    nodes = split_nodes_delimiter(nodes, "**", TextType.BOLD)
+    nodes = split_nodes_delimiter(nodes, "_", TextType.ITALIC)
+    nodes = split_nodes_delimiter(nodes, "`", TextType.CODE)
+    return nodes
 
 
 def extract_markdown_images(text):
@@ -105,25 +112,25 @@ def extract_markdown_links(text):
 if __name__ == "__main__":
     node = TextNode("This is text with a `code block` word", TextType.TEXT)
     new_nodes = split_nodes_delimiter([node], "`", TextType.CODE)
-    print(new_nodes)
+    pprint(new_nodes)
 
     text = "This is text with a ![rick roll](https://i.imgur.com/aKaOqIh.gif) and ![obi wan](https://i.imgur.com/fJRm4Vk.jpeg)"
-    print(extract_markdown_images(text))
+    pprint(extract_markdown_images(text))
 
     text = "This is text with a link [to boot dev](https://www.boot.dev) and [to youtube](https://www.youtube.com/@bootdotdev)"
-    print(extract_markdown_links(text))
+    pprint(extract_markdown_links(text))
 
     node = TextNode(
         "This is text with a link [to boot dev](https://www.boot.dev) and [to youtube](https://www.youtube.com/@bootdotdev)",
         TextType.TEXT,
     )
-    print(split_nodes_link([node]))
+    pprint(split_nodes_link([node]))
 
     node = TextNode(
         "This is text with a image ![to boot dev](https://www.image.dev) and [to youtube](https://www.youtube.com/@bootdotdev)",
         TextType.TEXT,
     )
-    print(split_nodes_image([node]))
+    pprint(split_nodes_image([node]))
 
     text = "This is **text** with an _italic_ word and a `code block` and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)"
-    print(text_to_textnodes(text))
+    pprint(text_to_textnodes(text))
