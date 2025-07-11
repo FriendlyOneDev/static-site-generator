@@ -2,11 +2,13 @@ from pathlib import Path
 import re
 import os
 import shutil
+import sys
 from block_utils import markdown_to_html_node
 
 
 def main():
-    public_dir = Path(__file__).parent.parent / "public"
+    basepath = sys.argv[1] if len(sys.argv) > 1 else "/"
+    public_dir = Path(__file__).parent.parent / "docs"
     static_dir = Path(__file__).parent.parent / "static"
 
     content_dir = Path(__file__).parent.parent / "content"
@@ -17,7 +19,7 @@ def main():
 
     # shutil.copytree(static_dir, public_dir)
     copy_file_tree(static_dir, public_dir)
-    generate_pages_recursive(content_dir, template_path, public_dir)
+    generate_pages_recursive(content_dir, template_path, public_dir, basepath)
 
 
 def copy_file_tree(src, dst):
@@ -42,7 +44,7 @@ def extract_title(markdown):
         raise Exception("No header provided")
 
 
-def generate_pages_recursive(content_path, template_path, dest_dir_path):
+def generate_pages_recursive(content_path, template_path, dest_dir_path, basepath):
     for root, dirs, files in os.walk(content_path):
         relative_path = os.path.relpath(root, content_path)
         current_dest_dir = os.path.join(dest_dir_path, relative_path)
@@ -58,10 +60,10 @@ def generate_pages_recursive(content_path, template_path, dest_dir_path):
                     else f"{os.path.splitext(file)[0]}.html"
                 )
                 final_dest_path = os.path.join(current_dest_dir, html_filename)
-                generate_page(from_path, template_path, final_dest_path)
+                generate_page(from_path, template_path, final_dest_path, basepath)
 
 
-def generate_page(from_path, template_path, dest_path):
+def generate_page(from_path, template_path, dest_path, basepath):
     print(f"Generating page from {from_path} to {dest_path} using {template_path}")
 
     with open(from_path, encoding="utf-8") as f:
@@ -75,6 +77,9 @@ def generate_page(from_path, template_path, dest_path):
 
     html_string = template.replace("{{ Content }}", html_string)
     html_string = html_string.replace("{{ Title }}", title)
+
+    html_string = html_string.replace('href="/', f'href="{basepath}')
+    html_string = html_string.replace('src="/', f'src="{basepath}')
 
     os.makedirs(os.path.dirname(dest_path), exist_ok=True)
 
