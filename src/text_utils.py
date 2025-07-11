@@ -1,4 +1,5 @@
 from textnode import TextNode, TextType
+from htmlnode import text_node_to_html_node
 from pprint import pprint
 import re
 
@@ -99,6 +100,17 @@ def text_to_textnodes(text):
     nodes = split_nodes_delimiter(nodes, "_", TextType.ITALIC)
     nodes = split_nodes_delimiter(nodes, "`", TextType.CODE)
     return nodes
+
+
+def text_to_children(text):
+    text_nodes = text_to_textnodes(text)
+
+    html_nodes = []
+    for text_node in text_nodes:
+        html_node = text_node_to_html_node(text_node)
+        html_nodes.append(html_node)
+
+    return html_nodes
 
 
 def extract_markdown_images(text):
