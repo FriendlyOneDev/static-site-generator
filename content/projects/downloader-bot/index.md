@@ -1,5 +1,7 @@
 # Downloader Bot
 
+[GitHub](https://github.com/FriendlyOneDev/downloader-bot)
+
 This is my first truly personal project—and I'm really happy with how it turned out. Why? Because it's something people actually use!  
 I'm also proud of its structure, it's easy to follow along due to modularity. And this project's structure I came up, as opposed to boot.dev's course where they tell you that this and that should be separate.
 

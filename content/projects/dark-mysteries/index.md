@@ -1,5 +1,7 @@
 # Dark Mysteries
 
+[GitHub](https://github.com/FriendlyOneDev/dark-mysteries)
+
 This is a project we built during a 3 day hackathon from July 25th to 28th, 2025.
 
 It was my first collaborative project - we were a team of three: one frontender and two backenders (I was one of the backend devs). We actually created a working website and deployed it on [Render](https://dark-mysteries.onrender.com/).  
