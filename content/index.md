@@ -12,13 +12,15 @@ Two years later, in 2024, I got a job at PwC as a Data Consolidator.
 Not even half a year in, I moved into something more interesting to me: using Alteryx to build data pipelines.  
 Working with Alteryx reignited my spark for programming, so I began studying backend development at boot.dev.
 
-I started it around two months ago and [haven’t missed a day of learning since](https://www.boot.dev/u/friendlyone).  
-In just these two months, I’ve already learned far more than during my time at Skillfactory and completed half a dozen projects.  
+I started it around two months ago and [haven't missed a day of learning since](https://www.boot.dev/u/friendlyone).  
+In just these two months, I've already learned far more than during my time at Skillfactory and completed half a dozen projects.  
 That number will only keep growing, as I'm genuinely excited to keep moving forward in this direction and making stuff **that matters**.
 
 ## Projects
 
-_Below is a list of projects in ascending order of complexity that I’ve built since joining the Boot.dev course. One of them was created during a 3-day hackathon I participated in. Click any project to see a short summary._
+[My GitHub](https://github.com/FriendlyOneDev/)
+
+_Below is a list of projects in ascending order of complexity that I've built since joining the Boot.dev course. One of them was created during a 3-day hackathon I participated in. Click any project to see a short summary._
 
 - [Assisted Project: Bookbot](/projects/bookbot)
 - [Assisted Project: Asteroids](/projects/asteroids)
@@ -28,14 +30,8 @@ _Below is a list of projects in ascending order of complexity that I’ve built 
 - [Group Project: Dark Mysteries](/projects/dark-mysteries) - _Hackathon project_
 - More to come...
 
-**Note:** _"Assisted Project"_ means the project idea and general direction, and code that wasn't the purpose of the project(like learning vector logic for pygame) were provided by Boot.dev, but not the actual solution that I had to write myself.
- 
- _Also, I didn't bother with adding readme's for most of those assisted projects_
+**Note:** _"Assisted Project"_ means the project idea and general direction, and code that wasn't the purpose of the project(like learning vector logic for pygame) were provided by Boot.dev, but not the actual solution that I had to write myself. 
 
-## Education
-
-- Lviv Linguistic Gymnasium  
-- Ivan Franko National University of Lviv - Bachelor’s in Economic Cybernetics  
-- Ivan Franko National University of Lviv - Master’s in Information Technology in Business _(ongoing)_
+Most assisted projects don't have detailed READMEs, as they were primarily for learning and not public use - but I'm happy to explain them if asked!
 
 ![frog](/images/frog.gif)
